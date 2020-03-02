@@ -1,6 +1,5 @@
-package ch1.test;
+package ch1;
 
-import ch1.ScoreCollection;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
