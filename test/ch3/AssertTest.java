@@ -1,7 +1,9 @@
 package ch3;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -71,6 +73,17 @@ public class AssertTest {
         account = new Account("an account name");
     }
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void exceptionRule() {
+        thrown.expect(InsufficientFundsException.class);
+        thrown.expectMessage("balance only 0");
+
+        account.withdraw(100);
+    }
+
     @Test
     public void hasPositiveBalance() {
         account.deposit(50);
@@ -101,5 +114,10 @@ public class AssertTest {
     public void notMatcherTest() {
         Account account = new Account("my big fat acct");
         assertThat(account.getName(), not(equalTo("plugin")));
+    }
+
+    @Test(expected = InsufficientFundsException.class)
+    public void throwsWhenWithdrawingTooMuch() {
+        account.withdraw(100);
     }
 }
