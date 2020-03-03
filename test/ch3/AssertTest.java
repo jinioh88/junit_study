@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class AssertTest {
@@ -80,5 +82,24 @@ public class AssertTest {
         int initBalance = account.getBalance();
         account.deposit(100);
         assertTrue(account.getBalance() > initBalance);
+    }
+
+    @Test
+    public void depositAssertThat() {
+        account.deposit(50);
+        assertThat(account.getBalance(), equalTo(50));
+    }
+
+    @Test
+    public void equalToTest() {
+        assertThat(new String[] {"a", "b"}, equalTo(new String[] {"a", "b"}));
+        Account account = new Account("my big fat acct");
+        assertThat(account.getName(), is(equalTo("my big fat acct")));
+    }
+
+    @Test
+    public void notMatcherTest() {
+        Account account = new Account("my big fat acct");
+        assertThat(account.getName(), not(equalTo("plugin")));
     }
 }
