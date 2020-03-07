@@ -1,4 +1,4 @@
-package ch3;
+package ch4;
 
 import org.junit.Before;
 import org.junit.Rule;
