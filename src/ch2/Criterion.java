@@ -19,4 +19,5 @@ public class Criterion implements Scoreable {private Weight weight;
         return getWeight() == Weight.DontCare ||
                 answer.match(getAnswer());
     }
+
 }
