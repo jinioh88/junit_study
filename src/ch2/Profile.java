@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Profile {
-    private Map<String, Answer> answers = new HashMap<>();
-    private int score;
+    private AnswerCollection answers = new AnswerCollection();
     private String name;
 
     public Profile(String name) {
@@ -17,18 +16,12 @@ public class Profile {
     }
 
     public void add(Answer answer) {
-        answers.put(answer.getQuestionText(), answer);
+        answers.add(answer);
     }
 
-    public boolean matches(Criteria criteria) {
-        MatchSet matchSet = new MatchSet(answers, criteria);
-        score = matchSet.getScore();
-
-        return matchSet.matches();
+    public MatchSet getMatchSet(Criteria criteria) {
+        return new MatchSet(answers, criteria);
     }
 
-    private Answer answerMatching(Criterion criterion) {
-        return answers.get(criterion.getAnswer().getQuestionText());
-    }
 
 }
